@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import * as pdfjsLib from "pdfjs-dist";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { FaGithub } from "react-icons/fa";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc =
   `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.worker.min.mjs`;
@@ -139,16 +140,12 @@ The response should contain:
 
     let y = 20;
 
-    // Title
-
     doc.setFont("helvetica", "bold");
     doc.setFontSize(24);
 
     doc.text("AI Personalized Study Plan", 15, y);
 
     y += 15;
-
-    // Subtitle
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(11);
@@ -163,15 +160,11 @@ The response should contain:
 
     y += 15;
 
-    // Divider
-
     doc.setDrawColor(180);
 
     doc.line(15, y, 195, y);
 
     y += 10;
-
-    // Process sections
 
     const sections = plan.split("#").filter(Boolean);
 
@@ -183,14 +176,10 @@ The response should contain:
 
       const content = lines.slice(1).join("\n");
 
-      // New page if needed
-
       if (y > 240) {
         doc.addPage();
         y = 20;
       }
-
-      // Section Title
 
       doc.setFont("helvetica", "bold");
       doc.setFontSize(18);
@@ -200,8 +189,6 @@ The response should contain:
       doc.text(title, 15, y);
 
       y += 10;
-
-      // Content
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
@@ -215,8 +202,6 @@ The response should contain:
       y += splitText.length * 7 + 12;
 
     });
-
-    // Summary Table
 
     autoTable(doc, {
       startY: y,
@@ -497,6 +482,50 @@ The response should contain:
             </div>
 
           )}
+
+        </div>
+
+        {/* Footer */}
+
+        <div className="
+        mt-16
+        pt-8
+        border-t
+        border-white/10
+        flex
+        flex-col
+        md:flex-row
+        items-center
+        justify-between
+        gap-4
+        text-zinc-400
+        ">
+
+          <p className="text-sm">
+            © 2026 AI Study Planner • Built by Tanmay Patil
+          </p>
+
+          <a
+            href="https://github.com/tannysard"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="
+            flex
+            items-center
+            gap-3
+            hover:text-white
+            transition
+            duration-300
+            "
+          >
+
+            <FaGithub className="text-2xl" />
+
+            <span className="font-medium">
+              github.com/tannysard
+            </span>
+
+          </a>
 
         </div>
 
