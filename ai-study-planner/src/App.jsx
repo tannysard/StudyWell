@@ -171,7 +171,7 @@ The response should contain:
 
     y += 10;
 
-    // Process content
+    // Process sections
 
     const sections = plan.split("#").filter(Boolean);
 
@@ -183,7 +183,7 @@ The response should contain:
 
       const content = lines.slice(1).join("\n");
 
-      // Add new page if needed
+      // New page if needed
 
       if (y > 240) {
         doc.addPage();
@@ -201,7 +201,7 @@ The response should contain:
 
       y += 10;
 
-      // Section Content
+      // Content
 
       doc.setFont("helvetica", "normal");
       doc.setFontSize(12);
@@ -216,7 +216,7 @@ The response should contain:
 
     });
 
-    // Example Summary Table
+    // Summary Table
 
     autoTable(doc, {
       startY: y,
@@ -238,9 +238,13 @@ The response should contain:
 
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 text-white flex items-center justify-center p-6 relative overflow-hidden">
 
+      {/* Glow Effects */}
+
       <div className="absolute w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-20 top-10 left-10 animate-pulse"></div>
 
       <div className="absolute w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20 bottom-10 right-10 animate-pulse"></div>
+
+      {/* Main Container */}
 
       <div className="backdrop-blur-lg bg-white/10 border border-white/20 p-8 rounded-3xl w-full max-w-5xl shadow-2xl z-10">
 
@@ -363,7 +367,7 @@ The response should contain:
             "
           />
 
-          {/* Generate */}
+          {/* Generate Button */}
 
           <button
             onClick={generatePlan}
@@ -441,33 +445,50 @@ The response should contain:
 
               </div>
 
-              <div
-                className="
-                prose
-                prose-invert
-                max-w-none
-                prose-headings:text-white
-                prose-headings:font-bold
-                prose-h1:text-4xl
-                prose-h2:text-3xl
-                prose-h3:text-2xl
-                prose-p:text-zinc-300
-                prose-li:text-zinc-300
-                prose-strong:text-white
-                prose-code:text-purple-300
-                prose-table:w-full
-                prose-th:border
-                prose-td:border
-                prose-th:border-white/20
-                prose-td:border-white/20
-                prose-th:bg-white/10
-                prose-th:p-4
-                prose-td:p-4
-                leading-8
-                "
-              >
+              <div className="
+              text-zinc-300
+              leading-8
+              space-y-6
+              ">
 
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+
+                    h1: ({ node, ...props }) => (
+                      <h1 className="text-4xl font-bold mt-10 mb-6 text-white" {...props} />
+                    ),
+
+                    h2: ({ node, ...props }) => (
+                      <h2 className="text-3xl font-bold mt-8 mb-5 text-white" {...props} />
+                    ),
+
+                    h3: ({ node, ...props }) => (
+                      <h3 className="text-2xl font-semibold mt-6 mb-4 text-white" {...props} />
+                    ),
+
+                    p: ({ node, ...props }) => (
+                      <p className="mb-5 text-zinc-300 leading-8" {...props} />
+                    ),
+
+                    li: ({ node, ...props }) => (
+                      <li className="ml-6 mb-2 list-disc" {...props} />
+                    ),
+
+                    table: ({ node, ...props }) => (
+                      <table className="w-full border-collapse border border-white/20 my-6" {...props} />
+                    ),
+
+                    th: ({ node, ...props }) => (
+                      <th className="border border-white/20 bg-white/10 p-4 text-left" {...props} />
+                    ),
+
+                    td: ({ node, ...props }) => (
+                      <td className="border border-white/20 p-4" {...props} />
+                    ),
+
+                  }}
+                >
                   {plan}
                 </ReactMarkdown>
 
