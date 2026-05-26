@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.3.0",
+    "git": "^0.1.5",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
+    "pdfjs-dist": "^5.7.284",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "tailwindcss": "^4.3.0"
+  }
+}
